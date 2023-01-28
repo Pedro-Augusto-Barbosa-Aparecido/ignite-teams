@@ -1,18 +1,45 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { GroupCard } from '@components/groupcard';
+import { Header } from '@components/header';
+import { Highlight } from '@components/highlight';
+import { useState } from 'react';
+import { Container } from './styles';
+
+import { FlatList } from "react-native"
+import { ListEmpty } from '@components/listEmpty';
+import { Button } from '@components/button';
 
 export default function Groups() {
+  const [groups, setGroups] = useState<string[]>([]);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <Container>
+      <Header />
+      <Highlight 
+        title='Turmas' 
+        subtitle='Jogue com a sua turma' 
+      />
+
+      <FlatList 
+        data={groups}
+        keyExtractor={item => item}
+        contentContainerStyle={groups.length === 0 && {
+          flex: 1
+        }}        
+        ListEmptyComponent={() => (
+          <ListEmpty 
+            message="Que tal cadastrar a primeira turma?" 
+          />
+        )}
+        renderItem={({ item }) => (
+          <GroupCard 
+            title={item} 
+          />
+        )}
+      />
+
+      <Button 
+        title='Cria nova turma'
+      />
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
