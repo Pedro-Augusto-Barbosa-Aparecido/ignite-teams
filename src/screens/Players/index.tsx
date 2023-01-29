@@ -6,13 +6,21 @@ import { Highlight } from "@components/highlight";
 import { Input } from "@components/input";
 import { ListEmpty } from "@components/listEmpty";
 import { PlayerCard } from "@components/playerCard";
+import { useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import { FlatList } from "react-native";
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
 
+type PlayerRouteParams = {
+  group: string;
+}
+
 export function Players() {
   const [team, setTeam] = useState<string>("Time A");
   const [players, setPlayers] = useState([])
+
+  const route = useRoute();
+  const { group } = route.params as PlayerRouteParams;
 
   return (
     <Container>
@@ -21,7 +29,7 @@ export function Players() {
       />
 
       <Highlight 
-        title="Nome da Turma"
+        title={group}
         subtitle="adicione a galera e separe os times"
       />
 

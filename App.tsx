@@ -1,12 +1,10 @@
-import { ThemeProvider } from "styled-components";
-import Groups from "@screens/groups";
+import { ThemeProvider } from "styled-components/native";
 import theme from "@theme/index";
 
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from "@expo-google-fonts/roboto";
 import { Spinner } from "@components/spinner";
 import { StatusBar } from "react-native";
-import { NewGroup } from "@screens/newGroup";
-import { Players } from "@screens/Players";
+import { Routes } from "@routes/index";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold })
@@ -18,7 +16,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <Players /> : <Spinner size={40} />}
+      {fontsLoaded ? <Routes /> : <Spinner size={40} />}
     </ThemeProvider>
   );
 }
